@@ -13,10 +13,11 @@ const init = async () => {
 
   if (products) {
     setupStore(products);
-    console.log(store);
+
+    const featured = store.filter((item) => item.featured === true);
+
+    display(featured, getElement('.featured-center'));
   }
 };
 
-window.addEventListener('DOMContentLoaded', () => {
-  init();
-});
+window.addEventListener('DOMContentLoaded', init);
