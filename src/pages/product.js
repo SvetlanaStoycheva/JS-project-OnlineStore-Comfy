@@ -1,24 +1,84 @@
 // global imports
-// import '../toggleSidebar.js';
-// import '../cart/toggleCart.js';
-// import '../cart/setupCart.js';
+import '../toggleSidebar.js';
+import '../cart/toggleCart.js';
+import '../cart/setupCart.js';
 // specific
-// import { addToCart } from '../cart/setupCart.js';
-// import { singleProductUrl, getElement, formatPrice } from '../utils.js';
+import { addToCart } from '../cart/setupCart.js';
+import { singleProductUrl, getElement, formatPrice } from '../utils.js';
 
 // selections
-// const loading = getElement('.page-loading');
-// const centerDOM = getElement('.single-product-center');
-// const pageTitleDOM = getElement('.page-hero-title');
+const loading = getElement('.page-loading');
+const centerDOM = getElement('.single-product-center');
+const pageTitleDOM = getElement('.page-hero-title');
 // const imgDOM = getElement('.single-product-img');
 // const titleDOM = getElement('.single-product-title');
 // const companyDOM = getElement('.single-product-company');
 // const priceDOM = getElement('.single-product-price');
-// const colorsDOM = getElement('.single-product-colors');
+
 // const descDOM = getElement('.single-product-desc');
 // const cartBtn = getElement('.addToCartBtn');
+
+// const singleProductEl = getElement('.single-product');
 
 // cart product
 // let productID;
 
 // show product when page loads
+window.addEventListener('DOMContentLoaded', async () => {
+  loading.style.display = 'none';
+  const urlId = location.search;
+
+  try {
+    const response = await fetch(`${singleProductUrl}${urlId}`);
+    if (response.status >= 200 && response.status <= 299) {
+      const data = await response.json();
+      //   console.log(data.fields);
+      displaySingleProduct(data, centerDOM);
+    } else {
+      console.log(response.status, response.statusText);
+      centerDOM.innerHTML = `
+        <div>
+        <h3 class="error">sorry, something went wrong</h3>
+        <a href="index.html" class="btn">back home</a>
+        </div>
+        `;
+    }
+  } catch (error) {
+    //   handling the network error
+    console.log(error);
+  }
+});
+
+const displaySingleProduct = (product, domContainer) => {
+  const { id } = product;
+  const { name, price, image, colors, company, description } = product.fields;
+  const { url } = image[0];
+
+  pageTitleDOM.textContent = name;
+
+  domContainer.innerHTML = `
+        <img
+          src="${url}"
+          class="img single-product-img"
+          alt="${name}"
+        />
+        <article class="single-product-info">
+          <div>
+            <h2 class="single-product-title">${name}</h2>
+            <p class="single-product-company text-slanted">${company}</p>
+            <p class="single-product-price">${formatPrice(price)}</p>
+            ${colors
+              .map((color) => {
+                return `
+                 <div class="product-color" style="background: ${color}" ></div>
+                `;
+              })
+              .join('')}
+            <p class="single-product-desc">
+              ${description}
+            </p>
+            <button class="btn addToCartBtn" data-id="${id}">add to cart</button>
+          </div>
+        </article>
+  `;
+};

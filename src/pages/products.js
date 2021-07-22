@@ -14,7 +14,10 @@ import display from '../displayProducts.js';
 import { getElement } from '../utils.js';
 
 const loading = getElement('.page-loading');
+// console.log(store);
 
 display(store, getElement('.products-container'));
 setupSearch(store);
+setupCompanies(store);
+setupPrice(store);
 loading.style.display = 'none';
