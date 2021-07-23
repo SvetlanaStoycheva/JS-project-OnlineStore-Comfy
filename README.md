@@ -17,9 +17,12 @@
 - Responsive CSS design: On a small screen we have a sidebar
 
 <p align-items: center>
-    <img src='./images/Screenshot-project-01.png' width='600'>
+    <img src='./images/Screenshot-project-01.png' width='500'>
 </p>
 </br>
 <p align-items: center>
-    <img src='./images/Screenshot-project-02.png' width='600'>
+    <img src='./images/Screenshot-project-02.png' width='500'>
+</p>
+<p align-items: center>
+    <img src='./images/Screenshot-project-03.png' width='500'>
 </p>

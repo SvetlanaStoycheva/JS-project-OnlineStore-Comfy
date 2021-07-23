@@ -10,15 +10,6 @@ import { singleProductUrl, getElement, formatPrice } from '../utils.js';
 const loading = getElement('.page-loading');
 const centerDOM = getElement('.single-product-center');
 const pageTitleDOM = getElement('.page-hero-title');
-// const imgDOM = getElement('.single-product-img');
-// const titleDOM = getElement('.single-product-title');
-// const companyDOM = getElement('.single-product-company');
-// const priceDOM = getElement('.single-product-price');
-
-// const descDOM = getElement('.single-product-desc');
-// const cartBtn = getElement('.addToCartBtn');
-
-// const singleProductEl = getElement('.single-product');
 
 // cart product
 // let productID;
@@ -34,6 +25,12 @@ window.addEventListener('DOMContentLoaded', async () => {
       const data = await response.json();
       //   console.log(data.fields);
       displaySingleProduct(data, centerDOM);
+
+      const cartBtn = getElement('.addToCartBtn');
+      cartBtn.addEventListener('click', function () {
+        const id = cartBtn.dataset.id;
+        addToCart(id);
+      });
     } else {
       console.log(response.status, response.statusText);
       centerDOM.innerHTML = `
@@ -54,7 +51,8 @@ const displaySingleProduct = (product, domContainer) => {
   const { name, price, image, colors, company, description } = product.fields;
   const { url } = image[0];
 
-  pageTitleDOM.textContent = name;
+  document.title = `${name.toUpperCase()} | Comfy`;
+  pageTitleDOM.textContent = `Home / ${name}`;
 
   domContainer.innerHTML = `
         <img
@@ -65,7 +63,7 @@ const displaySingleProduct = (product, domContainer) => {
         <article class="single-product-info">
           <div>
             <h2 class="single-product-title">${name}</h2>
-            <p class="single-product-company text-slanted">${company}</p>
+            <p class="single-product-company text-slanted">By ${company}</p>
             <p class="single-product-price">${formatPrice(price)}</p>
             ${colors
               .map((color) => {
