@@ -16,7 +16,7 @@ const setupSearch = (store) => {
           return item;
         }
       });
-      display(newStore, getElement('.products-container'));
+      display(newStore, getElement('.products-container'), true);
       if (newStore.length < 1) {
         const container = getElement('.products-container');
         container.innerHTML = `
@@ -25,7 +25,7 @@ const setupSearch = (store) => {
         </h3>`;
       }
     } else {
-      display(store, getElement('.products-container'));
+      display(store, getElement('.products-container'), true);
     }
   });
 };

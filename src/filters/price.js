@@ -24,7 +24,7 @@ const setupPrice = (store) => {
     // console.log(value);
     priceValue.textContent = formatPrice(value);
     const newStore = store.filter((item) => item.price <= value);
-    display(newStore, getElement('.products-container'));
+    display(newStore, getElement('.products-container'), true);
   });
 };
 
