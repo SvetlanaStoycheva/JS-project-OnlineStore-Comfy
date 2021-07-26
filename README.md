@@ -2,7 +2,7 @@
 
 [Part of John Smilga's JS Tutorial](https://www.udemy.com/course/javascript-tutorial-for-beginners-w/learn/lecture/21671372?start=1#overview)
 
-- See the project on Netlify
+- [See the project on Netlify](https://sweta-vanilla-js-comfy-store.netlify.app/index.html)
 - Navbar with logo and links, that navigate to separate pages. Shopping cart.
 - On the home page, we have:
   Hero with link to the products;
